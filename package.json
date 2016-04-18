@@ -1,0 +1,49 @@
+{
+  "name": "fcc-nightlife",
+  "version": "1.0.0",
+  "description": "FCC Nightlife application",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ratracegrad/fcc-nightlife.git"
+  },
+  "keywords": [
+    "free",
+    "code",
+    "camp",
+    "nightlife",
+    "node.js",
+    "express",
+    "passport.js",
+    "ejs"
+  ],
+  "author": "Jennifer Bland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ratracegrad/fcc-nightlife/issues"
+  },
+  "homepage": "https://github.com/ratracegrad/fcc-nightlife#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.15.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.1",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.4.12",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "should": "^8.3.1"
+  }
+}
