@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+
+    <% include ./partials/header %>
+
+    <body>
+
+        <div class="container content">
+            <div class="col-xs-12 text-center">
+                <h1 class="title">Plans tonight?</h1>
+                <i class="fa fa-map-marker fa-3x"></i>
+                <i class="fa fa-cab fa-3x"></i>
+                <i class="fa fa-glass fa-3x"></i>
+                <p>See which bars are hoppin' tonight and RSVP ahead of time!</p>
+                <p>Remember: take a cab and drink responsible.</p>
+            </div>
+
+            <div class="col-xs-12">
+                <form class="form-inline">
+                    <div class="form-group col-xs-10">
+                        <input type="text" class="form-control" name="location" id="location" placeholder="WHERE YOU AT" required>
+                    </div>
+                    <button class="btn btn-default col-xs-2">GO</button>
+                </form>
+            </div>
+
+            <div class="col-xs-12 barContent">
+
+            </div>
+        </div>
+
+    <% include ./partials/scripts %>
+
+    </body>
+</html>
