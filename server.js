@@ -12,12 +12,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var configDB = require('./app/config/database.js');
+require('dotenv').load();
 
 /**
  * get environment variables
  */
 var port = process.env.PORT || 3000;
 var dbURI = process.env.MONGOLAB_URI || process.env.MONGODB_URI || configDB.url;
+
 
 /**
  * connect to mongo database

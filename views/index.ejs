@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-xs-12">
-                <form class="form-inline">
+                <form class="form-inline" id="target" action="/yelpsearch" method="post">
                     <div class="form-group col-xs-10">
                         <input type="text" class="form-control" name="location" id="location" placeholder="WHERE YOU AT" required>
                     </div>
@@ -24,12 +24,9 @@
                 </form>
             </div>
 
-            <div class="col-xs-12 barContent">
-
-            </div>
         </div>
 
-    <% include ./partials/scripts %>
+        <% include ./partials/scripts %>
 
     </body>
 </html>
