@@ -67,7 +67,6 @@ module.exports = function(app, passport) {
 
         yelp.search({ term: 'bar', location: '30306' })
                 .then(function(data) {
-                    console.log(data.businesses[0]);
                     res.render('results.ejs', {results: data } );
                 })
                 .catch(function(err) {
