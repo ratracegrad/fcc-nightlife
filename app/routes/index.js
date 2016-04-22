@@ -1,60 +1,24 @@
 var Yelp = require('node-yelp');
 
+var sharedResults;
+
 module.exports = function(app, passport) {
 
+    app.use(function(req, res, next) {
+        res.locals.login = req.isAuthenticated();
+        next();
+    });
+
     app.get('/', function(req, res) {
-        res.render('index.ejs', {yelp: null});
+        if (sharedResults) {
+            res.render('index', { displayResults: true, results: sharedResults, user: req.user });
+        } else {
+            res.render('index.ejs', { displayResults: false, user: req.user });
+        }
     });
 
-    app.get('/login', function(req, res) {
-
-        // render the page and pass in any flash data if it exists
-        res.render('login', { message: req.flash('loginMessage') });
-    });
-
-    // process the login form
-    // app.post('/login', do all our passport stuff here);
-
-    // =====================================
-    // SIGNUP ==============================
-    // =====================================
-    // show the signup form
-    app.get('/signup', function(req, res) {
-
-        // render the page and pass in any flash data if it exists
-        res.render('signup', { message: req.flash('signupMessage') });
-    });
-
-    // process the signup form
-     app.post('/signup', passport.authenticate('local-signup', {
-         successRedirect: '/profile',
-         failureRedirect: '/signup',
-         failureFlash: true
-     }));
-
-    // =====================================
-    // PROFILE SECTION =====================
-    // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile', {
-            user : req.user // get the user out of session and pass to template
-        });
-    });
-
-    // =====================================
-    // LOGOUT ==============================
-    // =====================================
-    app.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
-    });
-
-    // =====================================
-    // YELP SEARCH =========================
-    // =====================================
-    app.post('/yelpsearch', function(req, res) {
+    app.post('/', function(req, res) {
+        console.log('req.body', req.body);
 
         var yelp = new Yelp.createClient({
             oauth: {
@@ -65,13 +29,22 @@ module.exports = function(app, passport) {
             }
         });
 
-        yelp.search({ term: 'bar', location: '30306' })
+        yelp.search({ term: 'bar', location: req.body.location })
                 .then(function(data) {
-                    res.render('results.ejs', {results: data } );
+                    sharedResults = data;
+                    console.log('post / req.user', req.user);
+                    res.render('index.ejs', {results: data, displayResults: true, user: req.user } );
                 })
                 .catch(function(err) {
                     console.log({error: err});
                 });
+    });
+
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+
+    app.get('/auth/facebook/callback', passport.authenticate('facebook'), function(req, res) {
+        console.log('req.user', req.user);
+        res.render('index.ejs', { results: sharedResults, displayResults: true, user: req.user });
     });
 
 };
