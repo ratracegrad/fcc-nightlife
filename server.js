@@ -36,6 +36,7 @@ mongoose.connection.on('connected', function() {
 
     app.use(morgan('dev'));
     app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());
     app.use('/public', express.static('public'));
     app.set('view engine', 'ejs');
